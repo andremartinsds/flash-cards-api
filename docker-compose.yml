@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  mysql-golang:
+    image: mysql:8.0
+    container_name: mysql_golang
+    restart: always
+    platform: linux/amd64
+    volumes:
+      - ./mysql_data:/var/lib/mysql 
+    environment:
+      - MYSQL_ROOT_PASSWORD="${DB_ROOT_PASSWORD}"
+      - MYSQL_DATABASE="${DB_NAME}"
+      - MYSQL_USER="${DB_USERNAME}"
+      - MYSQL_PASSWORD="${DB_PASSWORD}"
+    ports:
+      - 3313:3306
+    networks:
+      - flash-cards-api-network
+
+networks:
+  flash-cards-api-network:
+    driver: bridge
