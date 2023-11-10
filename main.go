@@ -1,7 +1,17 @@
 package main
 
-import "fmt"
+import (
+	"github.com/andremartinsds/flash-cards-api/config"
+	"github.com/andremartinsds/flash-cards-api/router"
+)
 
 func main() {
-	fmt.Println("structure")
+	err := config.Init()
+
+	if err != nil {
+		//TODO: change to logger
+		panic(err)
+	}
+
+	router.Initilize()
 }
