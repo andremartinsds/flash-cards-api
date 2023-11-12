@@ -8,24 +8,24 @@ import (
 
 type User struct {
 	gorm.Model
-	name  string
-	email string
-	pass  string
+	Name  string
+	Email string
+	Pass  string
 	Dec   []Dec
 }
 
 type Dec struct {
 	gorm.Model
-	name       string
+	Name       string
 	FlashCards []FlashCards
 	UserID     uint
 }
 
 type FlashCards struct {
 	gorm.Model
-	front        string
-	back         string
-	nextRevision time.Time
-	lastRevision time.Time
-	FlashCardsID uint
+	Front        string
+	Back         string
+	NextRevision time.Time
+	LastRevision time.Time
+	DecID        uint
 }
