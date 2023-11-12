@@ -1,23 +1,21 @@
-version: '3'
+version: '3.7'
 
 services:
-  mysql-golang:
-    image: mysql:8.0
-    container_name: mysql_golang
-    restart: always
+  mysql:
+    image: mysql:5.7
+    container_name: golang_flash_cards_mysql
     platform: linux/amd64
     volumes:
-      - ./mysql_data:/var/lib/mysql 
+      - ./.mysql:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD="${DB_ROOT_PASSWORD}"
-      - MYSQL_DATABASE="${DB_NAME}"
-      - MYSQL_USER="${DB_USERNAME}"
-      - MYSQL_PASSWORD="${DB_PASSWORD}"
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     ports:
       - 3313:3306
     networks:
-      - flash-cards-api-network
+      - golang-flash-cards-mysql-network
 
 networks:
-  flash-cards-api-network:
+  golang-flash-cards-mysql-network:
     driver: bridge
