@@ -1,8 +1,6 @@
 package config
 
 import (
-	"errors"
-
 	"gorm.io/gorm"
 )
 
@@ -13,10 +11,16 @@ var (
 func Init() error {
 	var err error
 
+	err = loadEnv()
+
+	if err != nil {
+		return err
+	}
+
 	db, err = InitializeDatabase()
 
 	if err != nil {
-		errors.New("Database with error")
+		return err
 	}
 
 	return nil
