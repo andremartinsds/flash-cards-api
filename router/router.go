@@ -1,12 +1,16 @@
 package router
 
-import "github.com/gin-gonic/gin"
+import (
+	"os"
+
+	"github.com/gin-gonic/gin"
+)
 
 func Initilize() {
 	router := gin.Default()
 
 	initilizeRoutes(router)
 
-	//TODO: get por from .env
-	router.Run(":8081")
+	port := ":" + os.Getenv("APPLICATION_PORT")
+	router.Run(port)
 }
