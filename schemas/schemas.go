@@ -14,6 +14,10 @@ type User struct {
 	Dec   []Dec
 }
 
+func (u *User) UserExistis() bool {
+	return u.ID != 0
+}
+
 type Dec struct {
 	gorm.Model
 	Name       string
