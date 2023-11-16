@@ -32,7 +32,7 @@ func CreateUserHandler(ctx *gin.Context) {
 		return
 	}
 
-	response := fromUserSaveToResponse(user)
+	response := fromSaveUserToResponse(user)
 
 	sendSuccess(ctx, http.StatusCreated, "create-user", response)
 
