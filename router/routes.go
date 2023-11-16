@@ -13,6 +13,8 @@ func initilizeRoutes(router *gin.Engine) {
 	api := router.Group(uriPath)
 	{
 		api.POST("user", handler.CreateUserHandler)
+		api.GET("user", handler.ReadUserHandler)
+		api.DELETE("user", handler.DeleteUserHandler)
 	}
 
 }
