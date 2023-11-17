@@ -15,6 +15,7 @@ func initilizeRoutes(router *gin.Engine) {
 		api.POST("user", handler.CreateUserHandler)
 		api.GET("user", handler.ReadUserHandler)
 		api.DELETE("user", handler.DeleteUserHandler)
+		api.PUT("user", handler.UpdateUserHandler)
 	}
 
 }

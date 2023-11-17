@@ -11,6 +11,12 @@ type CreateUserRequest struct {
 	Pass             string `json:"pass"`
 	PassConfirmation string `json:"passConfirmation"`
 }
+type UpdateUserRequest struct {
+	Name             string `json:"name"`
+	Email            string `json:"email"`
+	Pass             string `json:"pass"`
+	PassConfirmation string `json:"passConfirmation"`
+}
 
 func paramRequired(name, typ string) error {
 
@@ -50,4 +56,16 @@ func (u *CreateUserRequest) UserCreateValidate() error {
 
 	return nil
 
+}
+
+func (u *UpdateUserRequest) UpdateUserValidate() error {
+	if u.Name == "" {
+		return paramRequired("name", "string")
+	}
+
+	if err := validateEmail(u.Email); err != nil {
+		return errors.New("The email need a value")
+	}
+
+	return nil
 }

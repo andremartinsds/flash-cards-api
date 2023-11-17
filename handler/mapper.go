@@ -26,6 +26,22 @@ func fromRequestUserToUser(u CreateUserRequest) *schemas.User {
 		Pass:  u.Pass,
 	}
 }
+func fromUpdateRequestUserToUser(u UpdateUserRequest, user *schemas.User) *schemas.User {
+
+	if u.Email != "" {
+		user.Name = u.Name
+	}
+
+	if u.Name != "" {
+		user.Email = u.Email
+	}
+
+	if u.Pass != "" {
+		user.Pass = u.Pass
+	}
+
+	return user
+}
 
 func fromSaveUserToResponse(u *schemas.User) UserCreateResponse {
 	return UserCreateResponse{
