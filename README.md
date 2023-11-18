@@ -50,16 +50,20 @@ cd flash-cards-api
 Create a .env file in the project's root and set the necessary environment variables, such as database credentials and server settings.
 
 ```bash
-  MYSQL_ROOT_PASSWORD=your_mysql_root_password
-  MYSQL_DATABASE=your_mysql_database
-  MYSQL_USER=your_mysql_user
-  MYSQL_PASSWORD=your_mysql_password
+APPLICATION_PORT=""
+
+HOST=""
+MYSQL_USER=""
+MYSQL_ROOT_PASSWORD=""
+MYSQL_DATABASE=""
+MYSQL_PASSWORD=""
+PORT=""
 ```
 
 3. Install dependencies:
 
 ```bash
-go mod tyde
+go mod tidy
 ```
 
 4. Execute docker-compose:
@@ -76,15 +80,17 @@ In this case you can run the flash-cards-api with:
 go run main.go
 ```
 
-if you wnat execute with swagger you can run with make like:
+if you want execute with swagger you can run with make like:
 
 ```bash
-make
+
+<!-- TODO: add swagger -->
+
 ```
 
 ## Examples
 
-put the video gif here
+<!-- TODO: add swagger -->
 
 ## Contribution
 
