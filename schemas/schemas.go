@@ -25,6 +25,10 @@ type Dec struct {
 	UserID     uint
 }
 
+func (d *Dec) DecExists() bool {
+	return d.ID != 0
+}
+
 type FlashCards struct {
 	gorm.Model
 	Front        string
