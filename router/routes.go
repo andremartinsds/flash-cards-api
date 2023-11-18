@@ -2,6 +2,7 @@ package router
 
 import (
 	"github.com/andremartinsds/flash-cards-api/handler"
+	hUser "github.com/andremartinsds/flash-cards-api/handler/user"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
@@ -15,11 +16,11 @@ func initilizeRoutes(router *gin.Engine) {
 	api := router.Group(uriPath)
 	{
 
-		api.POST("user", handler.CreateUserHandler)
-		api.GET("user", handler.ReadUserHandler)
-		api.GET("users", handler.ListUserHandler)
-		api.DELETE("user", handler.DeleteUserHandler)
-		api.PUT("user", handler.UpdateUserHandler)
+		api.POST("user", hUser.CreateUserHandler)
+		api.GET("user", hUser.ReadUserHandler)
+		api.GET("users", hUser.ListUserHandler)
+		api.DELETE("user", hUser.DeleteUserHandler)
+		api.PUT("user", hUser.UpdateUserHandler)
 	}
 
 }

@@ -6,9 +6,9 @@ import (
 )
 
 var (
-	db *gorm.DB
+	DB *gorm.DB
 )
 
 func InitializeHandler() {
-	db = config.GetDataSource()
+	DB = config.GetDataSource()
 }

@@ -4,6 +4,7 @@ import (
 	"errors"
 	"net/http"
 
+	"github.com/andremartinsds/flash-cards-api/handler"
 	"github.com/andremartinsds/flash-cards-api/schemas"
 	"github.com/gin-gonic/gin"
 )
@@ -27,7 +28,7 @@ func CreateUserHandler(ctx *gin.Context) {
 
 	user := fromRequestUserToUser(request)
 
-	if err := db.Create(&user).Error; err != nil {
+	if err := handler.DB.Create(&user).Error; err != nil {
 		sendError(ctx, http.StatusInternalServerError, err.Error())
 		return
 	}
@@ -40,7 +41,7 @@ func CreateUserHandler(ctx *gin.Context) {
 
 func userAlreadExists(email string) error {
 	var userFound schemas.User
-	db.First(&userFound, "email = ?", email)
+	handler.DB.First(&userFound, "email = ?", email)
 
 	if userFound.UserExistis() {
 		return errors.New("The user already exists")

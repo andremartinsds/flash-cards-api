@@ -3,6 +3,7 @@ package handler
 import (
 	"net/http"
 
+	"github.com/andremartinsds/flash-cards-api/handler"
 	"github.com/andremartinsds/flash-cards-api/schemas"
 	"github.com/gin-gonic/gin"
 )
@@ -26,14 +27,14 @@ func UpdateUserHandler(ctx *gin.Context) {
 	}
 
 	var user schemas.User
-	if err := db.First(&user, "id = ?", id).Error; err != nil {
+	if err := handler.DB.First(&user, "id = ?", id).Error; err != nil {
 		sendError(ctx, http.StatusNotFound, "the user is not found")
 		return
 	}
 
 	fromUpdateRequestUserToUser(updateUserRequest, &user)
 
-	if err = db.Save(&user).Error; err != nil {
+	if err = handler.DB.Save(&user).Error; err != nil {
 		sendError(ctx, http.StatusNotFound, "error on update user")
 		return
 	}
