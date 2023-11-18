@@ -4,9 +4,6 @@ import (
 	"fmt"
 )
 
-type Dec struct {
-}
-
 type CreateDecRequest struct {
 	Name   string `json:"name"`
 	UserID uint   `json:"userId"`
