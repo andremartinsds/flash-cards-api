@@ -37,3 +37,7 @@ type FlashCards struct {
 	LastRevision time.Time
 	DecID        uint
 }
+
+func (f *FlashCards) FlashCardExists() bool {
+	return f.ID != 0
+}

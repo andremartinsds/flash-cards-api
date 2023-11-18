@@ -3,6 +3,7 @@ package router
 import (
 	"github.com/andremartinsds/flash-cards-api/handler"
 	hDec "github.com/andremartinsds/flash-cards-api/handler/dec"
+	hFlashCard "github.com/andremartinsds/flash-cards-api/handler/flash-cards"
 	hUser "github.com/andremartinsds/flash-cards-api/handler/user"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -16,7 +17,6 @@ func initilizeRoutes(router *gin.Engine) {
 	router.Use(cors.Default())
 	api := router.Group(uriPath)
 	{
-
 		api.POST("user", hUser.CreateUserHandler)
 		api.GET("user", hUser.ReadUserHandler)
 		api.GET("users", hUser.ListUserHandler)
@@ -28,6 +28,12 @@ func initilizeRoutes(router *gin.Engine) {
 		api.GET("decs", hDec.ListDecHandler)
 		api.DELETE("dec", hDec.DeleteDecHandler)
 		api.PUT("dec", hDec.UpdateDecHandler)
+
+		api.POST("flash-card", hFlashCard.CreateFlashCardHandler)
+		api.GET("flash-card", hFlashCard.ReadFlashCardHandler)
+		api.GET("flash-cards", hFlashCard.ListFlashCardHandler)
+		api.DELETE("flash-card", hFlashCard.DeleteFlashCardHandler)
+		api.PUT("flash-card", hFlashCard.UpdateFlashCardHandler)
 	}
 
 }
