@@ -9,6 +9,18 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// @BasePath /api
+
+// @Summary Create Dec
+// @Description Create a new dec
+// @Tags Dec
+// @Accept json
+// @Produce json
+// @Param request body CreateDecRequest true "Request body"
+// @Success 201 {object} DecCreateResponse
+// @Failure 400 {object} ErrorDecResponse
+// @Failure 500 {object} ErrorDecResponse
+// @Router /dec [post]
 func CreateDecHandler(ctx *gin.Context) {
 	request := CreateDecRequest{}
 

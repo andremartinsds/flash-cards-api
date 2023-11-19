@@ -1,12 +1,15 @@
 package router
 
 import (
+	"github.com/andremartinsds/flash-cards-api/docs"
 	"github.com/andremartinsds/flash-cards-api/handler"
 	hDec "github.com/andremartinsds/flash-cards-api/handler/dec"
 	hFlashCard "github.com/andremartinsds/flash-cards-api/handler/flash-cards"
 	hUser "github.com/andremartinsds/flash-cards-api/handler/user"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	swaggerfiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 func initializeRoutes(router *gin.Engine) {
@@ -14,7 +17,10 @@ func initializeRoutes(router *gin.Engine) {
 
 	uriPath := "/api/"
 
+	docs.SwaggerInfo.BasePath = uriPath
+
 	router.Use(cors.Default())
+
 	api := router.Group(uriPath)
 	{
 		api.POST("user", hUser.CreateUserHandler)
@@ -35,5 +41,5 @@ func initializeRoutes(router *gin.Engine) {
 		api.DELETE("flash-card", hFlashCard.DeleteFlashCardHandler)
 		api.PUT("flash-card", hFlashCard.UpdateFlashCardHandler)
 	}
-
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 }
