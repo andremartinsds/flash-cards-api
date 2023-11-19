@@ -7,7 +7,6 @@ import (
 )
 
 func sendError(ctx *gin.Context, code int, msg string) {
-
 	ctx.JSON(code, gin.H{
 		"message": msg,
 		"code":    code,

@@ -30,7 +30,7 @@ type FlashCardDelete struct {
 	DecId uint   `json:"decId"`
 }
 
-func fromRequestFlashCardToFlashCard(f CreateFlashCardRequest) *schemas.FlashCards {
+func fromRequestFlashCardToFlashCardModel(f CreateFlashCardRequest) *schemas.FlashCards {
 	return &schemas.FlashCards{
 		Front: f.Front,
 		Back:  f.Back,
@@ -38,7 +38,7 @@ func fromRequestFlashCardToFlashCard(f CreateFlashCardRequest) *schemas.FlashCar
 	}
 }
 
-func fromUpdateRequestFlashCardToFlashCard(f UpdateFlashCardRequest, flashCard *schemas.FlashCards) *schemas.FlashCards {
+func fromUpdateRequestFlashCardToFlashCardModel(f UpdateFlashCardRequest, flashCard *schemas.FlashCards) *schemas.FlashCards {
 
 	if f.Front != "" {
 		flashCard.Front = f.Front

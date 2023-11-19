@@ -13,5 +13,5 @@ func main() {
 		panic(err)
 	}
 
-	router.Initilize()
+	router.Initialize()
 }

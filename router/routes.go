@@ -9,7 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func initilizeRoutes(router *gin.Engine) {
+func initializeRoutes(router *gin.Engine) {
 	handler.InitializeHandler()
 
 	uriPath := "/api/"

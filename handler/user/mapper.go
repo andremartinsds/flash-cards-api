@@ -25,14 +25,14 @@ type UserDelete struct {
 	Email string `json:"email"`
 }
 
-func fromRequestUserToUser(u CreateUserRequest) *schemas.User {
+func fromRequestUserToUserModel(u CreateUserRequest) *schemas.User {
 	return &schemas.User{
 		Name:  u.Name,
 		Email: u.Email,
 		Pass:  u.Pass,
 	}
 }
-func fromUpdateRequestUserToUser(u UpdateUserRequest, user *schemas.User) *schemas.User {
+func fromUpdateRequestUserToUserModel(u UpdateUserRequest, user *schemas.User) *schemas.User {
 
 	if u.Email != "" {
 		user.Name = u.Name

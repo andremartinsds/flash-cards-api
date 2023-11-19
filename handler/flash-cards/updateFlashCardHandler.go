@@ -33,7 +33,7 @@ func UpdateFlashCardHandler(ctx *gin.Context) {
 		return
 	}
 
-	fromUpdateRequestFlashCardToFlashCard(updateFlachCardRequest, &flashCard)
+	fromUpdateRequestFlashCardToFlashCardModel(updateFlachCardRequest, &flashCard)
 
 	// TODO: add rules to handle with Last and Next revision
 	flashCard.LastRevision = time.Now()

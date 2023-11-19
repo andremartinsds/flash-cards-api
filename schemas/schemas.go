@@ -14,7 +14,7 @@ type User struct {
 	Dec   []Dec
 }
 
-func (u *User) UserExistis() bool {
+func (u *User) UserExists() bool {
 	return u.ID != 0
 }
 

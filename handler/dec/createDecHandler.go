@@ -12,7 +12,11 @@ import (
 func CreateDecHandler(ctx *gin.Context) {
 	request := CreateDecRequest{}
 
-	ctx.BindJSON(&request)
+	err := ctx.BindJSON(&request)
+	if err != nil {
+		sendError(ctx, http.StatusBadRequest, "We have a problem with that, please try again")
+		return
+	}
 
 	if err := request.DecCreateValidate(); err != nil {
 		sendError(ctx, http.StatusBadRequest, err.Error())
@@ -25,7 +29,7 @@ func CreateDecHandler(ctx *gin.Context) {
 		return
 	}
 
-	err := decAlreadExists(request)
+	err = decAlreadyExists(request)
 
 	if err != nil {
 		sendError(ctx, http.StatusConflict, err.Error())
@@ -45,7 +49,7 @@ func CreateDecHandler(ctx *gin.Context) {
 
 }
 
-func decAlreadExists(request CreateDecRequest) error {
+func decAlreadyExists(request CreateDecRequest) error {
 	var decFound schemas.Dec
 	handler.DB.First(&decFound, "name = ? AND user_id = ?", request.Name, request.UserID)
 

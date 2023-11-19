@@ -32,7 +32,7 @@ func validateEmail(email string) error {
 	return nil
 }
 
-func isValidePass(pass, passConfirmation string) error {
+func isValidPass(pass, passConfirmation string) error {
 	if pass == passConfirmation {
 		print("entrou aqui")
 		return nil
@@ -42,7 +42,7 @@ func isValidePass(pass, passConfirmation string) error {
 }
 
 func (u *CreateUserRequest) UserCreateValidate() error {
-	if err := isValidePass(u.Pass, u.PassConfirmation); err != nil {
+	if err := isValidPass(u.Pass, u.PassConfirmation); err != nil {
 		return errors.New("the password does not equal")
 	}
 

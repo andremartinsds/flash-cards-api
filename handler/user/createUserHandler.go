@@ -12,21 +12,25 @@ import (
 func CreateUserHandler(ctx *gin.Context) {
 	request := CreateUserRequest{}
 
-	ctx.BindJSON(&request)
+	err := ctx.BindJSON(&request)
+	if err != nil {
+		sendError(ctx, http.StatusBadRequest, err.Error())
+		return
+	}
 
 	if err := request.UserCreateValidate(); err != nil {
 		sendError(ctx, http.StatusBadRequest, err.Error())
 		return
 	}
 
-	err := userAlreadExists(request.Email)
+	err = userAlreadyExists(request.Email)
 
 	if err != nil {
 		sendError(ctx, http.StatusConflict, err.Error())
 		return
 	}
 
-	user := fromRequestUserToUser(request)
+	user := fromRequestUserToUserModel(request)
 
 	if err := handler.DB.Create(&user).Error; err != nil {
 		sendError(ctx, http.StatusInternalServerError, err.Error())
@@ -39,11 +43,11 @@ func CreateUserHandler(ctx *gin.Context) {
 
 }
 
-func userAlreadExists(email string) error {
+func userAlreadyExists(email string) error {
 	var userFound schemas.User
 	handler.DB.First(&userFound, "email = ?", email)
 
-	if userFound.UserExistis() {
+	if userFound.UserExists() {
 		return errors.New("The user already exists")
 	}
 

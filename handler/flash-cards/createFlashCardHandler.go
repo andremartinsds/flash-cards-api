@@ -13,7 +13,11 @@ import (
 func CreateFlashCardHandler(ctx *gin.Context) {
 	request := CreateFlashCardRequest{}
 
-	ctx.BindJSON(&request)
+	err := ctx.BindJSON(&request)
+	if err != nil {
+		sendError(ctx, http.StatusBadRequest, err.Error())
+		return
+	}
 
 	if err := request.FlashCardCreateValidate(); err != nil {
 		sendError(ctx, http.StatusBadRequest, err.Error())
@@ -26,14 +30,14 @@ func CreateFlashCardHandler(ctx *gin.Context) {
 		return
 	}
 
-	err := flashCardAlreadExists(request)
+	err = flashCardAlreadyExists(request)
 
 	if err != nil {
 		sendError(ctx, http.StatusConflict, err.Error())
 		return
 	}
 
-	flashCard := fromRequestFlashCardToFlashCard(request)
+	flashCard := fromRequestFlashCardToFlashCardModel(request)
 
 	// TODO: add rules to handle with Last and Next revision
 	flashCard.LastRevision = time.Now()
@@ -50,7 +54,7 @@ func CreateFlashCardHandler(ctx *gin.Context) {
 
 }
 
-func flashCardAlreadExists(request CreateFlashCardRequest) error {
+func flashCardAlreadyExists(request CreateFlashCardRequest) error {
 	var flashCard schemas.FlashCards
 	handler.DB.First(&flashCard, "front = ? AND dec_id = ?", request.Front, request.DecId)
 

@@ -32,7 +32,7 @@ func UpdateUserHandler(ctx *gin.Context) {
 		return
 	}
 
-	fromUpdateRequestUserToUser(updateUserRequest, &user)
+	fromUpdateRequestUserToUserModel(updateUserRequest, &user)
 
 	if err = handler.DB.Save(&user).Error; err != nil {
 		sendError(ctx, http.StatusNotFound, "error on update user")

@@ -17,9 +17,13 @@ func UpdateDecHandler(ctx *gin.Context) {
 	}
 
 	var updateDecRequest UpdateDecRequest
-	ctx.BindJSON(&updateDecRequest)
+	err := ctx.BindJSON(&updateDecRequest)
+	if err != nil {
+		sendError(ctx, http.StatusBadRequest, err.Error())
+		return
+	}
 
-	err := updateDecRequest.UpdateDecValidate()
+	err = updateDecRequest.UpdateDecValidate()
 
 	if err != nil {
 		sendError(ctx, http.StatusBadRequest, err.Error())
