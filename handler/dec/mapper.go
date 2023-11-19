@@ -26,6 +26,11 @@ type DecDelete struct {
 	UserId uint   `json:"userId"`
 }
 
+type ErrorDecResponse struct {
+	Message string `json:"message"`
+	Code    uint   `json:"code"`
+}
+
 func fromRequestDecToDec(d CreateDecRequest) *schemas.Dec {
 	return &schemas.Dec{
 		Name:   d.Name,
