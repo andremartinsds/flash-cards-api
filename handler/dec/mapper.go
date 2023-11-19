@@ -4,33 +4,6 @@ import (
 	"github.com/andremartinsds/flash-cards-api/schemas"
 )
 
-type DecCreateResponse struct {
-	Id     uint   `json:"id"`
-	Name   string `json:"name"`
-	UserId uint   `json:"userId"`
-}
-type DecReadResponse struct {
-	Id     uint   `json:"id"`
-	Name   string `json:"name"`
-	UserId uint   `json:"userId"`
-}
-type DecListResponse struct {
-	Id     uint   `json:"id"`
-	Name   string `json:"name"`
-	UserId uint   `json:"userId"`
-}
-
-type DecDelete struct {
-	Id     uint   `json:"id"`
-	Name   string `json:"name"`
-	UserId uint   `json:"userId"`
-}
-
-type ErrorDecResponse struct {
-	Message string `json:"message"`
-	Code    uint   `json:"code"`
-}
-
 func fromRequestDecToDec(d CreateDecRequest) *schemas.Dec {
 	return &schemas.Dec{
 		Name:   d.Name,
@@ -45,18 +18,18 @@ func fromUpdateRequestDecToDec(d UpdateDecRequest, dec *schemas.Dec) *schemas.De
 	return dec
 }
 
-func fromSaveDecToResponse(d *schemas.Dec) DecCreateResponse {
-	return DecCreateResponse{
+func fromSaveDecToResponse(d *schemas.Dec) CreateDecResponseData {
+	return CreateDecResponseData{
 		Id:     d.ID,
 		Name:   d.Name,
 		UserId: d.UserID,
 	}
 }
 
-func fromListDecToResponse(d []schemas.Dec) []DecListResponse {
-	var decListResponseCollection []DecListResponse
+func fromListDecToResponse(d []schemas.Dec) []ListDecResponseData {
+	var decListResponseCollection []ListDecResponseData
 	for i := 0; i < len(d); i++ {
-		decListResponse := DecListResponse{
+		decListResponse := ListDecResponseData{
 			Id:     d[i].ID,
 			Name:   d[i].Name,
 			UserId: d[i].ID,
@@ -66,16 +39,24 @@ func fromListDecToResponse(d []schemas.Dec) []DecListResponse {
 	return decListResponseCollection
 }
 
-func fromReadDecToResponse(d *schemas.Dec) DecReadResponse {
-	return DecReadResponse{
+func fromReadDecToResponse(d *schemas.Dec) DecReadResponseData {
+	return DecReadResponseData{
 		Id:     d.ID,
 		Name:   d.Name,
 		UserId: d.ID,
 	}
 }
 
-func fromDeleteDecToResponse(d *schemas.Dec) DecDelete {
-	return DecDelete{
+func fromUpdateDecToResponse(d *schemas.Dec) DecUpdateResponseData {
+	return DecUpdateResponseData{
+		Id:     d.ID,
+		Name:   d.Name,
+		UserId: d.ID,
+	}
+}
+
+func fromDeleteDecToResponse(d *schemas.Dec) DeleteDecResponseData {
+	return DeleteDecResponseData{
 		Id:     d.ID,
 		Name:   d.Name,
 		UserId: d.ID,

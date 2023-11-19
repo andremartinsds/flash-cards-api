@@ -1,0 +1,249 @@
+definitions:
+  handler.CreateDecRequest:
+    properties:
+      name:
+        type: string
+      userId:
+        type: integer
+    type: object
+  handler.CreateDecResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handler.CreateDecResponseData'
+      message:
+        type: string
+    type: object
+  handler.CreateDecResponseData:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      userId:
+        type: integer
+    type: object
+  handler.DecReadResponseData:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      userId:
+        type: integer
+    type: object
+  handler.DecUpdateResponseData:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      userId:
+        type: integer
+    type: object
+  handler.DeleteDecResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handler.DeleteDecResponseData'
+      message:
+        type: string
+    type: object
+  handler.DeleteDecResponseData:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      userId:
+        type: integer
+    type: object
+  handler.ErrorDecResponse:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+    type: object
+  handler.ListDecResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/handler.ListDecResponseData'
+        type: array
+      message:
+        type: string
+    type: object
+  handler.ListDecResponseData:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      userId:
+        type: integer
+    type: object
+  handler.ReadDecResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handler.DecReadResponseData'
+      message:
+        type: string
+    type: object
+  handler.UpdateDecRequest:
+    properties:
+      name:
+        type: string
+      userId:
+        type: integer
+    type: object
+  handler.UpdateDecResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handler.DecUpdateResponseData'
+      message:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /dec:
+    delete:
+      consumes:
+      - application/json
+      description: Delete dec
+      parameters:
+      - description: Dec identification
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.DeleteDecResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorDecResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorDecResponse'
+      summary: Delete dec
+      tags:
+      - Dec
+    get:
+      description: Read one dec
+      parameters:
+      - description: Dec identification
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.ReadDecResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorDecResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorDecResponse'
+      summary: Read one dec
+      tags:
+      - Dec
+    post:
+      consumes:
+      - application/json
+      description: Create a new dec
+      parameters:
+      - description: Request body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.CreateDecRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/handler.CreateDecResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorDecResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorDecResponse'
+      summary: Create Dec
+      tags:
+      - Dec
+    put:
+      consumes:
+      - application/json
+      description: Update dec
+      parameters:
+      - description: Request body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.UpdateDecRequest'
+      - description: Dec identification
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.UpdateDecResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorDecResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorDecResponse'
+      summary: Update dec
+      tags:
+      - Dec
+  /decs:
+    get:
+      consumes:
+      - application/json
+      description: List dec
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.ListDecResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorDecResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorDecResponse'
+      summary: List dec
+      tags:
+      - Dec
+swagger: "2.0"

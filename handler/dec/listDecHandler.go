@@ -8,6 +8,17 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// @BasePath /api
+
+// @Summary List dec
+// @Description List dec
+// @Tags Dec
+// @Accept json
+// @Produce json
+// @Success 200 {object} ListDecResponse
+// @Failure 400 {object} ErrorDecResponse
+// @Failure 404 {object} ErrorDecResponse
+// @Router /decs [get]
 func ListDecHandler(ctx *gin.Context) {
 
 	var dec []schemas.Dec

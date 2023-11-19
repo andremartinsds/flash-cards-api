@@ -8,6 +8,19 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// @BasePath /api
+
+// @Summary Update dec
+// @Description Update dec
+// @Tags Dec
+// @Accept json
+// @Produce json
+// @Param request body UpdateDecRequest true "Request body"
+// @Param id query string true "Dec identification"
+// @Success 200 {object} UpdateDecResponse
+// @Failure 400 {object} ErrorDecResponse
+// @Failure 404 {object} ErrorDecResponse
+// @Router /dec [put]
 func UpdateDecHandler(ctx *gin.Context) {
 	id := ctx.Query("id")
 
@@ -43,7 +56,7 @@ func UpdateDecHandler(ctx *gin.Context) {
 		return
 	}
 
-	response := fromReadDecToResponse(&dec)
+	response := fromUpdateDecToResponse(&dec)
 
 	sendSuccess(ctx, http.StatusOK, "read dec", response)
 

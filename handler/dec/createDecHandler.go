@@ -17,7 +17,7 @@ import (
 // @Accept json
 // @Produce json
 // @Param request body CreateDecRequest true "Request body"
-// @Success 201 {object} DecCreateResponse
+// @Success 201 {object} CreateDecResponse
 // @Failure 400 {object} ErrorDecResponse
 // @Failure 500 {object} ErrorDecResponse
 // @Router /dec [post]
