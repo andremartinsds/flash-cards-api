@@ -4,32 +4,6 @@ import (
 	"github.com/andremartinsds/flash-cards-api/schemas"
 )
 
-type FlashCardCreateResponse struct {
-	Id    uint   `json:"id"`
-	Front string `json:"front"`
-	Back  string `json:"back"`
-	DecId uint   `json:"decId"`
-}
-type FlashCardReadResponse struct {
-	Id    uint   `json:"id"`
-	Front string `json:"front"`
-	Back  string `json:"back"`
-	DecId uint   `json:"decId"`
-}
-type FlashCardListResponse struct {
-	Id    uint   `json:"id"`
-	Front string `json:"front"`
-	Back  string `json:"back"`
-	DecId uint   `json:"decId"`
-}
-
-type FlashCardDelete struct {
-	Id    uint   `json:"id"`
-	Front string `json:"front"`
-	Back  string `json:"back"`
-	DecId uint   `json:"decId"`
-}
-
 func fromRequestFlashCardToFlashCardModel(f CreateFlashCardRequest) *schemas.FlashCards {
 	return &schemas.FlashCards{
 		Front: f.Front,
@@ -50,8 +24,8 @@ func fromUpdateRequestFlashCardToFlashCardModel(f UpdateFlashCardRequest, flashC
 	return flashCard
 }
 
-func fromSaveFlashCardToResponse(f *schemas.FlashCards) FlashCardCreateResponse {
-	return FlashCardCreateResponse{
+func fromSaveFlashCardToResponse(f *schemas.FlashCards) FlashCardCreateResponseData {
+	return FlashCardCreateResponseData{
 		Id:    f.ID,
 		Front: f.Front,
 		Back:  f.Back,
@@ -59,10 +33,10 @@ func fromSaveFlashCardToResponse(f *schemas.FlashCards) FlashCardCreateResponse 
 	}
 }
 
-func fromListFlashCardToResponse(f []schemas.FlashCards) []FlashCardListResponse {
-	var flashCardListResponseCollection []FlashCardListResponse
+func fromListFlashCardToResponse(f []schemas.FlashCards) []FlashCardListResponseData {
+	var flashCardListResponseCollection []FlashCardListResponseData
 	for i := 0; i < len(f); i++ {
-		flashCardListResponse := FlashCardListResponse{
+		flashCardListResponse := FlashCardListResponseData{
 			Id:    f[i].ID,
 			Front: f[i].Front,
 			Back:  f[i].Back,
@@ -73,8 +47,8 @@ func fromListFlashCardToResponse(f []schemas.FlashCards) []FlashCardListResponse
 	return flashCardListResponseCollection
 }
 
-func fromReadFlashCardToResponse(f *schemas.FlashCards) FlashCardReadResponse {
-	return FlashCardReadResponse{
+func fromReadFlashCardToResponse(f *schemas.FlashCards) FlashCardReadResponseData {
+	return FlashCardReadResponseData{
 		Id:    f.ID,
 		Front: f.Front,
 		Back:  f.Back,
@@ -82,8 +56,8 @@ func fromReadFlashCardToResponse(f *schemas.FlashCards) FlashCardReadResponse {
 	}
 }
 
-func fromDeleteFlashCardToResponse(f *schemas.FlashCards) FlashCardDelete {
-	return FlashCardDelete{
+func fromDeleteFlashCardToResponse(f *schemas.FlashCards) FlashCardDeleteResponseData {
+	return FlashCardDeleteResponseData{
 		Id:    f.ID,
 		Front: f.Front,
 		Back:  f.Back,

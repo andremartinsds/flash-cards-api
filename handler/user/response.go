@@ -21,3 +21,57 @@ func sendSuccess(ctx *gin.Context, code int, op string, data interface{}) {
 		"data":    data,
 	})
 }
+
+type UserCreateResponseData struct {
+	Id    uint   `json:"id"`
+	Name  string `json:"name"`
+	Email string `json:"email"`
+}
+type UserCreateResponse struct {
+	Message string
+	Data    UserCreateResponseData
+}
+
+type UserReadResponseData struct {
+	Id    uint   `json:"id"`
+	Name  string `json:"name"`
+	Email string `json:"email"`
+}
+type UserReadResponse struct {
+	Message string
+	Data    UserReadResponseData
+}
+
+type UserUpdateResponseData struct {
+	Id    uint   `json:"id"`
+	Name  string `json:"name"`
+	Email string `json:"email"`
+}
+type UserUpdateResponse struct {
+	Message string
+	Data    UserUpdateResponseData
+}
+
+type UserListResponseData struct {
+	Id    uint   `json:"id"`
+	Name  string `json:"name"`
+	Email string `json:"email"`
+}
+type UserListResponse struct {
+	Message string
+	Data    []UserListResponseData
+}
+
+type UserDeleteResponseData struct {
+	Id    uint   `json:"id"`
+	Email string `json:"email"`
+}
+type UserDeleteResponse struct {
+	Message string
+	Data    UserDeleteResponseData
+}
+
+type UserErrorResponse struct {
+	Message string
+	Code    uint
+}

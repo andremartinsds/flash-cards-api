@@ -10,6 +10,18 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// @BasePath /api
+
+// @Summary Create a Flash-Card
+// @Description Create a new Flash-Card
+// @Tags FlashCard
+// @Accept json
+// @Produce json
+// @Param request body CreateFlashCardRequest true "Request body"
+// @Success 201 {object} FlashCardCreateResponse
+// @Failure 400 {object} FlashCardErrorResponse
+// @Failure 500 {object} FlashCardErrorResponse
+// @Router /flash-card [post]
 func CreateFlashCardHandler(ctx *gin.Context) {
 	request := CreateFlashCardRequest{}
 

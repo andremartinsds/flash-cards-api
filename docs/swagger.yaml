@@ -22,6 +22,26 @@ definitions:
       userId:
         type: integer
     type: object
+  handler.CreateFlashCardRequest:
+    properties:
+      back:
+        type: string
+      decId:
+        type: integer
+      front:
+        type: string
+    type: object
+  handler.CreateUserRequest:
+    properties:
+      email:
+        type: string
+      name:
+        type: string
+      pass:
+        type: string
+      passConfirmation:
+        type: string
+    type: object
   handler.DecReadResponseData:
     properties:
       id:
@@ -63,6 +83,92 @@ definitions:
       message:
         type: string
     type: object
+  handler.FlashCardCreateResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handler.FlashCardListResponseData'
+      message:
+        type: string
+    type: object
+  handler.FlashCardDeleteResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handler.FlashCardDeleteResponseData'
+      message:
+        type: string
+    type: object
+  handler.FlashCardDeleteResponseData:
+    properties:
+      back:
+        type: string
+      decId:
+        type: integer
+      front:
+        type: string
+      id:
+        type: integer
+    type: object
+  handler.FlashCardErrorResponse:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+    type: object
+  handler.FlashCardListResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handler.FlashCardListResponseData'
+      message:
+        type: string
+    type: object
+  handler.FlashCardListResponseData:
+    properties:
+      back:
+        type: string
+      decId:
+        type: integer
+      front:
+        type: string
+      id:
+        type: integer
+    type: object
+  handler.FlashCardReadResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handler.FlashCardReadResponseData'
+      message:
+        type: string
+    type: object
+  handler.FlashCardReadResponseData:
+    properties:
+      back:
+        type: string
+      decId:
+        type: integer
+      front:
+        type: string
+      id:
+        type: integer
+    type: object
+  handler.FlashCardUpdateResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handler.FlashCardUpdateResponseData'
+      message:
+        type: string
+    type: object
+  handler.FlashCardUpdateResponseData:
+    properties:
+      back:
+        type: string
+      decId:
+        type: integer
+      front:
+        type: string
+      id:
+        type: integer
+    type: object
   handler.ListDecResponse:
     properties:
       data:
@@ -100,6 +206,113 @@ definitions:
       data:
         $ref: '#/definitions/handler.DecUpdateResponseData'
       message:
+        type: string
+    type: object
+  handler.UpdateFlashCardRequest:
+    properties:
+      back:
+        type: string
+      decId:
+        type: integer
+      front:
+        type: string
+    type: object
+  handler.UpdateUserRequest:
+    properties:
+      email:
+        type: string
+      name:
+        type: string
+      pass:
+        type: string
+      passConfirmation:
+        type: string
+    type: object
+  handler.UserCreateResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handler.UserCreateResponseData'
+      message:
+        type: string
+    type: object
+  handler.UserCreateResponseData:
+    properties:
+      email:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+  handler.UserDeleteResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handler.UserDeleteResponseData'
+      message:
+        type: string
+    type: object
+  handler.UserDeleteResponseData:
+    properties:
+      email:
+        type: string
+      id:
+        type: integer
+    type: object
+  handler.UserErrorResponse:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+    type: object
+  handler.UserListResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/handler.UserListResponseData'
+        type: array
+      message:
+        type: string
+    type: object
+  handler.UserListResponseData:
+    properties:
+      email:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+  handler.UserReadResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handler.UserReadResponseData'
+      message:
+        type: string
+    type: object
+  handler.UserReadResponseData:
+    properties:
+      email:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+  handler.UserUpdateResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handler.UserUpdateResponseData'
+      message:
+        type: string
+    type: object
+  handler.UserUpdateResponseData:
+    properties:
+      email:
+        type: string
+      id:
+        type: integer
+      name:
         type: string
     type: object
 info:
@@ -246,4 +459,263 @@ paths:
       summary: List dec
       tags:
       - Dec
+  /flash-card:
+    delete:
+      consumes:
+      - application/json
+      description: Flash-Card
+      parameters:
+      - description: Flash-Card identification
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.FlashCardDeleteResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.FlashCardErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.FlashCardErrorResponse'
+      summary: Delete Flash-Card
+      tags:
+      - FlashCard
+    get:
+      description: Read Flash-card
+      parameters:
+      - description: Flash-card identification
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.FlashCardReadResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.FlashCardErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.FlashCardErrorResponse'
+      summary: Read Flash-card
+      tags:
+      - FlashCard
+    post:
+      consumes:
+      - application/json
+      description: Create a new Flash-Card
+      parameters:
+      - description: Request body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.CreateFlashCardRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/handler.FlashCardCreateResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.FlashCardErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.FlashCardErrorResponse'
+      summary: Create a Flash-Card
+      tags:
+      - FlashCard
+    put:
+      consumes:
+      - application/json
+      description: Update Flash-Card
+      parameters:
+      - description: Request body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.UpdateFlashCardRequest'
+      - description: Flash-Card identification
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.FlashCardUpdateResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.FlashCardErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.FlashCardErrorResponse'
+      summary: Update Flash-Card
+      tags:
+      - FlashCard
+  /user:
+    delete:
+      consumes:
+      - application/json
+      description: User
+      parameters:
+      - description: User identification
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.UserDeleteResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.UserErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.UserErrorResponse'
+      summary: Delete User
+      tags:
+      - User
+    get:
+      description: Read User
+      parameters:
+      - description: User identification
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.UserReadResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.UserErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.UserErrorResponse'
+      summary: Read User
+      tags:
+      - User
+    post:
+      consumes:
+      - application/json
+      description: Create User
+      parameters:
+      - description: Request body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.CreateUserRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/handler.UserCreateResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.UserErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.UserErrorResponse'
+      summary: Create User
+      tags:
+      - User
+    put:
+      consumes:
+      - application/json
+      description: Update User
+      parameters:
+      - description: Request body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.UpdateUserRequest'
+      - description: User identification
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.UserUpdateResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.UserErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.UserErrorResponse'
+      summary: Update User
+      tags:
+      - User
+  /users:
+    get:
+      consumes:
+      - application/json
+      description: List User
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.UserListResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.UserErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.UserErrorResponse'
+      summary: List User
+      tags:
+      - User
 swagger: "2.0"

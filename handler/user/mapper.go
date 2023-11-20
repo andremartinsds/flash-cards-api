@@ -4,27 +4,6 @@ import (
 	"github.com/andremartinsds/flash-cards-api/schemas"
 )
 
-type UserCreateResponse struct {
-	Id    uint   `json:"id"`
-	Name  string `json:"name"`
-	Email string `json:"email"`
-}
-type UserReadResponse struct {
-	Id    uint   `json:"id"`
-	Name  string `json:"name"`
-	Email string `json:"email"`
-}
-type UserListResponse struct {
-	Id    uint   `json:"id"`
-	Name  string `json:"name"`
-	Email string `json:"email"`
-}
-
-type UserDelete struct {
-	Id    uint   `json:"id"`
-	Email string `json:"email"`
-}
-
 func fromRequestUserToUserModel(u CreateUserRequest) *schemas.User {
 	return &schemas.User{
 		Name:  u.Name,
@@ -49,18 +28,18 @@ func fromUpdateRequestUserToUserModel(u UpdateUserRequest, user *schemas.User) *
 	return user
 }
 
-func fromSaveUserToResponse(u *schemas.User) UserCreateResponse {
-	return UserCreateResponse{
+func fromSaveUserToResponse(u *schemas.User) UserCreateResponseData {
+	return UserCreateResponseData{
 		Id:    u.ID,
 		Name:  u.Name,
 		Email: u.Email,
 	}
 }
 
-func fromListUserToResponse(u []schemas.User) []UserListResponse {
-	var userListResponseCollection []UserListResponse
+func fromListUserToResponse(u []schemas.User) []UserListResponseData {
+	var userListResponseCollection []UserListResponseData
 	for i := 0; i < len(u); i++ {
-		userListResponse := UserListResponse{
+		userListResponse := UserListResponseData{
 			Id:    u[i].ID,
 			Name:  u[i].Name,
 			Email: u[i].Email,
@@ -70,16 +49,16 @@ func fromListUserToResponse(u []schemas.User) []UserListResponse {
 	return userListResponseCollection
 }
 
-func fromReadUserToResponse(u *schemas.User) UserReadResponse {
-	return UserReadResponse{
+func fromReadUserToResponse(u *schemas.User) UserReadResponseData {
+	return UserReadResponseData{
 		Id:    u.ID,
 		Name:  u.Name,
 		Email: u.Email,
 	}
 }
 
-func fromDeleteUserToResponse(u *schemas.User) UserDelete {
-	return UserDelete{
+func fromDeleteUserToResponse(u *schemas.User) UserDeleteResponseData {
+	return UserDeleteResponseData{
 		Id:    u.ID,
 		Email: u.Email,
 	}

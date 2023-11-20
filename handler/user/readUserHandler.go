@@ -8,6 +8,17 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// @BasePath /api
+
+// @Summary Read User
+// @Description Read User
+// @Tags User
+// @Produce json
+// @Param id query string true "User identification"
+// @Success 200 {object} UserReadResponse
+// @Failure 400 {object} UserErrorResponse
+// @Failure 404 {object} UserErrorResponse
+// @Router /user [get]
 func ReadUserHandler(ctx *gin.Context) {
 	id := ctx.Query("id")
 

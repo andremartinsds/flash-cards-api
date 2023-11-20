@@ -9,11 +9,24 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// @BasePath /api
+
+// @Summary Update Flash-Card
+// @Description Update Flash-Card
+// @Tags FlashCard
+// @Accept json
+// @Produce json
+// @Param request body UpdateFlashCardRequest true "Request body"
+// @Param id query string true "Flash-Card identification"
+// @Success 200 {object} FlashCardUpdateResponse
+// @Failure 400 {object} FlashCardErrorResponse
+// @Failure 404 {object} FlashCardErrorResponse
+// @Router /flash-card [put]
 func UpdateFlashCardHandler(ctx *gin.Context) {
 	id := ctx.Query("id")
 
 	if id == "" {
-		sendError(ctx, http.StatusBadRequest, "the id is required")
+		sendError(ctx, http.StatusBadRequest, "An id is required")
 		return
 	}
 
@@ -29,7 +42,7 @@ func UpdateFlashCardHandler(ctx *gin.Context) {
 
 	var flashCard schemas.FlashCards
 	if err := handler.DB.First(&flashCard, "id = ?", id).Error; err != nil {
-		sendError(ctx, http.StatusNotFound, "flash card does not found")
+		sendError(ctx, http.StatusNotFound, "Flash card not found.")
 		return
 	}
 
@@ -40,7 +53,7 @@ func UpdateFlashCardHandler(ctx *gin.Context) {
 	flashCard.NextRevision = time.Now()
 
 	if err = handler.DB.Save(&flashCard).Error; err != nil {
-		sendError(ctx, http.StatusNotFound, "error on update update flash card")
+		sendError(ctx, http.StatusNotFound, "Error on updating flash card.")
 		return
 	}
 

@@ -9,6 +9,18 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// @BasePath /api
+
+// @Summary Create User
+// @Description Create User
+// @Tags User
+// @Accept json
+// @Produce json
+// @Param request body CreateUserRequest true "Request body"
+// @Success 201 {object} UserCreateResponse
+// @Failure 400 {object} UserErrorResponse
+// @Failure 500 {object} UserErrorResponse
+// @Router /user [post]
 func CreateUserHandler(ctx *gin.Context) {
 	request := CreateUserRequest{}
 
@@ -48,7 +60,7 @@ func userAlreadyExists(email string) error {
 	handler.DB.First(&userFound, "email = ?", email)
 
 	if userFound.UserExists() {
-		return errors.New("The user already exists")
+		return errors.New("User already exists")
 	}
 
 	return nil
