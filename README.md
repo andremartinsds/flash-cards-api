@@ -74,23 +74,33 @@ docker-compose up
 
 5. Run api
 
-In this case you can run the flash-cards-api with:
+**In this case you can run the flash-cards-api with:**
 
 ```bash
 go run main.go
 ```
 
-if you want execute with swagger you can run with make like:
+**if you want execute with swagger you can run with like:**
 
 ```bash
-
-<!-- TODO: add swagger -->
+# install swag 
+go install github.com/swaggo/swag/cmd/swag@latest
 
 ```
 
-## Examples
+**Make sure that GOROOT and GOPATH are added to your bash profile**
 
-<!-- TODO: add swagger -->
+```bash
+export PATH=$PATH:$(go env GOPATH)/bin
+export PATH=$PATH:$(go env GOROOT)/bin
+```
+
+
+## Examples swagger
+
+<p align="center">
+  <img src="./assets/swagger-print.png" alt="Swagger example">
+</p>
 
 ## Contribution
 
